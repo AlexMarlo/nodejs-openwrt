@@ -30,7 +30,9 @@ endef
 
 define Build/Configure
 	(cd $(PKG_BUILD_DIR); \
-	./configure --dest-cpu=mips --dest-os=linux --without-ssl; \
+	rm -rf deps/v8; \
+	git clone https://github.com/evgenybaskakov/v8m-rb.git deps/v8; \
+	./configure --dest-cpu=mips --dest-os=linux --without-ssl --without-snapshot; \
 	);
 endef
 
