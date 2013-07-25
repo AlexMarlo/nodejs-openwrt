@@ -31,18 +31,22 @@ endef
 define Build/Configure
 	(cd $(PKG_BUILD_DIR); \
 	rm -rf deps/v8; \
-	git clone https://github.com/evgenybaskakov/v8m-rb.git deps/v8; \
-	./configure --dest-cpu=mips --dest-os=linux --without-ssl --without-snapshot; \
+	git clone https://github.com/brimstone/v8m-rb deps/v8; \
+	./configure --dest-cpu=mips --dest-os=linux --without-ssl --without-snapshot --with-arm-float-abi=soft; \
 	);
 endef
 
 define Build/Compile
-	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) CC="$(TARGET_CC)" CXX="$(TARGET_CXX)"
+	export CFLAGS="$(TARGET_CFLAGS)"
+	export CXXFLAGS="$(TARGET_CXXFLAGS)"
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) CC="$(TARGET_CC)" CXX="$(TARGET_CXX)" CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" || touch $(PKG_BUILD_DIR)/deps/v8/build/common.gypi
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) CC="$(TARGET_CC)" CXX="$(TARGET_CXX)" CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)"
 endef
 
 
 define Package/node/install
-	echo "FINDME Installer"
+	$(CP) $(PKG_BUILD_DIR)/out/Release/node $(1)/usr/bin/
+	ln -s /usr/bin/node $(1)/usr/bin/nodejs
 endef
 
 $(eval $(call BuildPackage,node))
