@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=node
-PKG_VERSION:=v0.10.13
+PKG_VERSION:=v0.10.14
 PKG_RELEASE:=1
 
 PKG_SOURCE:=node-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://nodejs.org/dist/${PKG_VERSION}
-PKG_MD5SUM:=4c8185732680fc70c90a4c39789e4ff0
+PKG_MD5SUM:=79632e1390ac728a87212b686afc1a9f
 GIT_SOURCE:=https://github.com/brimstone/v8m-rb
 GIT_SOURCE:=/tmp/v8m-rb
 
@@ -24,8 +24,8 @@ include $(INCLUDE_DIR)/package.mk
 
 define Package/node
   DEPENDS:=+libpthread +librt +uclibcxx
-  SECTION:=net
-  CATEGORY:=Network
+  SECTION:=lang
+  CATEGORY:=Languages
   TITLE:=Node.js is a platform built on Chrome's JavaScript runtime
   URL:=http://nodejs.org/
 endef
