@@ -13,7 +13,7 @@ PKG_RELEASE:=2
 
 PKG_SOURCE:=node-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://nodejs.org/dist/${PKG_VERSION}
-PKG_MD5SUM:=a2b05af77e8e3ef3b4c40a68372429f1
+PKG_MD5SUM:=8b905b6013b82fb7076b02a6c881f9a6
 
 GYP_DEFINES:=v8_can_use_fpu_instructions=false
 LIBS:=-I$(TOOLCHAIN_DIR)/i486-openwrt-linux-uclibc/include/c++/4.6.4/ -I$(TOOLCHAIN_DIR)/i486-openwrt-linux-uclibc/include/c++/4.6.4/i486-openwrt-linux-uclibc/
